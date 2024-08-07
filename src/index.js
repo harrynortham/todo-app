@@ -28,8 +28,13 @@ function addToProject(projectTitle, todo) {
 
 function createTodo() {
   // create the todo object
+  const newTodo = todo("test todo");
+  console.log(newTodo);
+  return newTodo;
   // add the object to the project
 }
+
+createTodo();
 
 // setup our default project
 let defaultProject = project("default");
