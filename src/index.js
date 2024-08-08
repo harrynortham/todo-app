@@ -1,6 +1,8 @@
 import "./style.css";
+import todoForm from "./todoForm.js";
+import { showProjects, newProjectButton } from "./projects.js";
 
-let projects = [];
+const projects = [];
 
 function project(title) {
   return {
@@ -15,33 +17,55 @@ function todo(title, description, dueDate, priority) {
     description,
     dueDate,
     priority,
+    completed: false,
+    setCompleted() {
+      completed = !completed;
+    },
   };
 }
 
 function addToProject(projectTitle, todo) {
   // use array find to update the project object with the projects array
-  let project = projects.find((project) => project.title === projectTitle);
+  const project = projects.find((project) => project.title === projectTitle);
   if (project) {
     project.todos.push(todo);
   }
 }
 
-function createTodo() {
+window.createProject = (projectTitle) => {
+  const newProject = project(projectTitle);
+  projects.push(newProject);
+  updateDisplay();
+};
+
+// use window to make available globally
+window.createTodo = (todoContent, projectTitle) => {
   // create the todo object
-  const newTodo = todo("test todo");
-  console.log(newTodo);
-  return newTodo;
+  const newTodo = todo(
+    todoContent.title,
+    todoContent.description,
+    todoContent.dueDate,
+    todoContent.priority
+  );
   // add the object to the project
+  addToProject(projectTitle, newTodo);
+  updateDisplay();
+};
+
+function updateDisplay() {
+  const container = document.getElementById("content");
+  container.innerHTML = "";
+  showProjects(projects, container);
 }
 
-createTodo();
+function init() {
+  // initialisation stuff here
+  newProjectButton(document.getElementsByTagName("header")[0]);
+  // create a default project
+  //createProject("Todos");
+  // create a first task and assign it to the default project
+  //createTodo({ title: "First task" }, "Todos");
+}
 
-// setup our default project
-let defaultProject = project("default");
-projects.push(defaultProject);
-
-// create a first task and assign it to the default project
-let defaultTodo = todo("First task", "Lets get this done");
-addToProject("default", defaultTodo);
-
-console.log(projects);
+// elsewhere in code
+init();
