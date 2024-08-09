@@ -4,7 +4,7 @@ import { createTodo } from "./todos.js";
 
 function init() {
   // initialisation stuff here
-  showProjectButton(document.getElementsByTagName("header")[0]);
+  showProjectButton(document.getElementById("actions"));
   // create a default project
   createProject("Todos");
   // create a first task and assign it to the default project

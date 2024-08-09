@@ -36,9 +36,17 @@ function addTodoProject(projectTitle, todo) {
 }
 
 function showTodos(todos) {
+  //create a list
+  const list = document.createElement("ul");
   todos.forEach((todo) => {
-    console.log(todo);
+    // add a list element with the todo to the list
+    //append the list to the div
+    let li = document.createElement("li");
+    li.innerText = todo.title;
+    list.appendChild(li);
   });
+  //return the list element
+  return list;
 }
 
 function showTodoForm(container) {
