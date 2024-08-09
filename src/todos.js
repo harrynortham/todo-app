@@ -14,7 +14,7 @@ function todo(title, description, dueDate, priority) {
 }
 
 // use window to make available globally
-function createTodo(todoContent, projectTitle) {
+function createTodo(todoContent, listTitle) {
   // create the todo object
   const newTodo = todo(
     todoContent.title,
@@ -22,16 +22,16 @@ function createTodo(todoContent, projectTitle) {
     todoContent.dueDate,
     todoContent.priority
   );
-  // add the object to the project
-  addTodoProject(projectTitle, newTodo);
+  // add the object to the list
+  addTodolist(listTitle, newTodo);
   updateDisplay();
 }
 
-function addTodoProject(projectTitle, todo) {
-  // use array find to update the project object with the projects array
-  const project = projects.find((project) => project.title === projectTitle);
-  if (project) {
-    project.todos.push(todo);
+function addTodolist(listTitle, todo) {
+  // use array find to update the list object with the lists array
+  const list = lists.find((list) => list.title === listTitle);
+  if (list) {
+    list.todos.push(todo);
   }
 }
 

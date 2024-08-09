@@ -1,9 +1,9 @@
-import { showProjects } from "./projects.js";
+import { showLists } from "./lists.js";
 
 function updateDisplay() {
   const container = document.getElementById("content");
   container.innerHTML = "";
-  showProjects(projects, container);
+  showLists(lists, container);
 }
 
 export { updateDisplay };
