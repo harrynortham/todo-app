@@ -1,4 +1,5 @@
 import { showTodos } from "./todos.js";
+import { updateDisplay } from "./display.js";
 
 //we will change this to session storage that both modules can access
 window.projects = [];
@@ -10,20 +11,10 @@ function project(title) {
   };
 }
 
-function addToProject(projectTitle, todo) {
-  // use array find to update the project object with the projects array
-  const project = projects.find((project) => project.title === projectTitle);
-  if (project) {
-    project.todos.push(todo);
-  }
-}
-
 function createProject(projectTitle) {
   const newProject = project(projectTitle);
   projects.push(newProject);
-  const container = document.getElementById("content");
-  container.innerHTML = "";
-  showProjects(projects, container);
+  updateDisplay();
 }
 
 function showProjects(projects, container) {
@@ -41,7 +32,7 @@ function showProjects(projects, container) {
   });
 }
 
-function newProjectButton(element) {
+function showProjectButton(element) {
   const button = document.createElement("button");
   button.textContent = "New Project";
   button.addEventListener("click", () => {
@@ -50,4 +41,4 @@ function newProjectButton(element) {
   element.appendChild(button);
 }
 
-export { createProject, addToProject, showProjects, newProjectButton };
+export { createProject, showProjects, showProjectButton };

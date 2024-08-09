@@ -1,4 +1,4 @@
-import { addToProject, showProjects } from "./projects.js";
+import { updateDisplay } from "./display.js";
 
 function todo(title, description, dueDate, priority) {
   return {
@@ -23,10 +23,16 @@ function createTodo(todoContent, projectTitle) {
     todoContent.priority
   );
   // add the object to the project
-  addToProject(projectTitle, newTodo);
-  const container = document.getElementById("content");
-  container.innerHTML = "";
-  showProjects(projects, container);
+  addTodoProject(projectTitle, newTodo);
+  updateDisplay();
+}
+
+function addTodoProject(projectTitle, todo) {
+  // use array find to update the project object with the projects array
+  const project = projects.find((project) => project.title === projectTitle);
+  if (project) {
+    project.todos.push(todo);
+  }
 }
 
 function showTodos(todos) {
